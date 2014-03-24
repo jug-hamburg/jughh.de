@@ -1,4 +1,3 @@
-jughh.de
-========
+Java User Group Hamburg website
 
-Java User Group Hamburg Website
+http://jughh.de
