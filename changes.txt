@@ -1,0 +1,6 @@
+main.css:
+#headerwrap 
+margin-top: from -20px to -128px
+min-height: from 650px to 700px
+background-color: from #3498DB to #004095
+
