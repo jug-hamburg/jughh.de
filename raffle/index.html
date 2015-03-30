@@ -1,0 +1,155 @@
+<!DOCTYPE HTML> 
+<html lang="de">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Daniel Galán y Martins">
+  <meta name="description" content="Raffle website for User Group Meetups">
+  <title>JUGHH Verlosungen</title>
+
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGdSURBVDjLpVMxa8JAFL6rAQUHXQoZpLU/oUOnDtKtW/MDBFHHThUKTgrqICgOEtd2EVxb2qFkKTgVChbSCnZTiVBEMBRLiEmafleCDaWxDX3w8e7dve+7l3cv1LZt8h/jvA56vV7DNM20YRgE/jyRSOR+ytvwEgAxvVwui/BF+LTvCtjNwKvj/X8CbgXPOHMEZl559HsTu93uPQi7jBiNRgMEx8PR0GIxRB+y2eze2gqQeAXoSCaqqu5bpsWIdyzGvvRrBW7rdDo2I6ZSKeq7B8x0XV/bwJWAJEnHSMwBDUEQWq5GfsJthUJhlVuv11uckyiGgiH2RWK73RYRb2cymbG7gnK5vIX9USwWI1yAI/KjLGK7teEI8HN1TizrnZWdRxxsNps8vI3YLpVKbB2EWB6XkMHzgAlvriYRSW+app1Mpy/jSCRSRSyDUON5nuJGytaAHI/vVPv9p/FischivL96gEP2bGxorhVFqYXDYQFCScwBYa9EKU1OlAkB+QLEU2AGaJ7PWKlUDiF2BBw4P9Mt/KUoije+5uAv9gGcjD6Kg4wu3AAAAABJRU5ErkJggg==" type="image/png" />
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+</head>
+
+<body>
+
+  <style type="text/css">
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    margin-bottom: 60px;
+    text-align: center;
+    background-color: #f0f0f0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.page-header {
+  border-bottom: 1px solid #d0d0d0;
+}
+.footer {
+    background-color: #d0d0d0;
+    bottom: 0;
+    height: 60px;
+    position: absolute;
+    width: 100%;
+}
+.container {
+    /*max-width: 680px;*/
+    padding: 0 15px;
+    width: auto;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.control {
+  font-size: 64pt;
+  color: #b0b0b0;
+  vertical-align: middle;
+  padding: 20pt;
+  cursor: pointer;
+}
+.control:hover {
+  color: #404040;
+}
+
+.containerflex {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+
+.number {
+  width: 160px;
+  height: 160px;
+  margin: 20px;
+  border: 2px solid red;
+  vertical-align: middle;
+  padding-top: 6px;
+
+  font-size: 80pt;
+  color: #404040;
+
+  border: 1px solid #c0c0c0;
+  background-color: #f8f8f8;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.24), 0px 0px 0px 2px #fff inset;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 0px 0.1em;
+  text-shadow: 0px 1px 0px #FFF;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+  </style>
+
+
+  <header class="container">
+    <div class="page-header">
+      <h1>Java User Group Hamburg Raffle</h1>
+    </div>
+  </header>
+
+  <div id="numbers" class="containerflex">
+    <p id="more" class="control" style="order: 99;">+</p>
+    <p id="less" class="control" style="order: 0;">-</p>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">Fix me on <a href="https://github.com/galan/jughh.de">github</a></p>
+    </div>
+  </footer>
+
+<script type="text/javascript">
+document.getElementById("more").addEventListener ('click', addNumber, false);
+document.getElementById("less").addEventListener ('click', removeNumber, false);
+
+window.onload = shuffle();
+
+function shuffle() {
+  rfDelay = 20; // controls the speed
+  rfCurrent = 0;
+  rfShuffling = false;
+  addNumber();
+  setTimeout(randomNumberTimer, rfDelay);
+}
+
+function randomNumberTimer() {
+  var current = document.getElementById("number" + rfCurrent);
+  current.innerHTML = getRandomNumber();
+  setTimeout(randomNumberTimer, rfDelay);
+}
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 10);
+}
+
+function addNumber() {
+  if (rfShuffling == false) {
+    var numbers = document.getElementById("numbers");
+    rfCurrent++;
+
+    var next = document.createElement("p");
+    next.innerHTML = getRandomNumber();
+    next.setAttribute("id", "number" + rfCurrent);
+    next.setAttribute("class", "number");
+    next.setAttribute("order", rfCurrent);
+
+    numbers.appendChild(next);
+  }
+}
+
+function removeNumber() {
+  if (rfCurrent > 1) {
+    var current = document.getElementById("number" + rfCurrent);
+    current.remove();
+    rfCurrent--;
+  }
+}
+</script>
+
+</body>
+</html>
